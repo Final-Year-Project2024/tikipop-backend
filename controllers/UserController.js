@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 exports.createUser = async (req, res) => {
     // jwt
     try {
-        const { name, email } = req.body;
+        const { name, email ,dp} = req.body;
         const existingUser = await User.find({ email: email });
         console.log(existingUser)
         if (existingUser.length > 0) {
@@ -17,7 +17,8 @@ exports.createUser = async (req, res) => {
         }
         const user = new User({
             name: name,
-            email: email
+            email: email,
+            dp: dp
         });
         user.save();
         res.status(200).json({ success: true, user});
